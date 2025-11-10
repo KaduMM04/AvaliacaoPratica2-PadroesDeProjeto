@@ -1,107 +1,94 @@
 # AvaliacaoPratica2-PadroesDeProjeto
 
-QUESTÃO 1 (Nota: 0,5: 
-Contexto: Você está desenvolvendo um sistema de processamento de dados para uma empresa financeira que lida com diferentes tipos de análise de risco. O sistema precisa calcular métricas de risco usando diferentes algoritmos (Value at Risk, Expected Shortfall, Stress Testing) que podem mudar dinamicamente durante a execução.
 
-Problema:
+---
 
-- Cada algoritmo de risco deve ser intercambiável em tempo de execução
+## ⚙️ Questão 1 — Strategy Pattern
 
-- Os algoritmos devem ser capazes de compartilhar um contexto complexo com múltiplos parâmetros financeiros
+### 🧩 Contexto
+O sistema precisa calcular métricas de risco (Value at Risk, Expected Shortfall, Stress Testing), que podem mudar **dinamicamente em tempo de execução**.
 
-- Deve ser possível trocar de algoritmo de acordo com a necessidade de negócios
+### 💡 Padrão utilizado
+**Strategy Pattern** — utilizado para permitir que **diferentes algoritmos de cálculo de risco** possam ser **trocados em tempo de execução** sem alterar o código cliente.
 
+### ✅ Benefícios
+- Facilita a **extensão de novos algoritmos** sem modificar o núcleo do sistema.  
+- Mantém o código **flexível e aberto para mudanças**.  
+- Isola cada estratégia de cálculo, melhorando a manutenção.
 
+### 📊 Diagrama UML
+📁 [Ver diagrama da Questão 1](Diagramas/questao01.png)
 
-Restrições:
+---
 
-- O cliente deve poder mudar de algoritmo sem conhecer os detalhes de implementação
+## ⚙️ Questão 2 — Adapter Pattern
 
-- Implemente pelo menos 3 algoritmos diferentes com cálculos dummy (podem ser mensagens de texto) distintos
+### 🧩 Contexto
+O sistema moderno precisa se comunicar com um **sistema bancário legado**, que usa métodos e tipos de dados **incompatíveis**.
 
+### 💡 Padrão utilizado
+**Adapter Pattern** — usado para **converter a interface moderna (`ProcessadorTransacoes`)** em uma interface que o sistema legado entende (`SistemaBancarioLegado`).
 
+### ✅ Benefícios
+- Permite **reutilizar código legado** sem precisar modificá-lo.  
+- **Isola incompatibilidades** de interface em um único ponto (o adaptador).  
+- Facilita a **migração gradual** para sistemas modernos.
 
-QUESTÃO 2 (0,5):
-Contexto: Sua empresa está integrando com um legado bancário que possui uma interface complexa para processamento de transações. A interface legada `SistemaBancarioLegado` possui métodos com assinaturas incompatíveis e usa tipos de dados obsoletos.
+### 📊 Diagrama UML
+📁 [Ver diagrama da Questão 2](Diagramas/questao02.png)
 
-Problema:
+---
 
-- Converter a interface atualizada ProcessadorTransacoes (com métodos autorizar(String cartao, double valor, String moeda)) para a interface legada
+## ⚙️ Questão 3 — State Pattern
 
-- O sistema legado usa: processarTransacao(HashMap<String, Object> parametros)
+### 🧩 Contexto
+Sistema de controle de uma **usina nuclear**, com múltiplos estados (DESLIGADA, OPERACAO_NORMAL, ALERTA_AMARELO, ALERTA_VERMELHO, EMERGENCIA, MANUTENÇÃO), e regras complexas de transição.
 
-- Implemente de forma que o funcionamento seja bidirecional, ou seja, que também permita converter respostas do legado para o formato atualizado
+### 💡 Padrão utilizado
+**State Pattern** — utilizado para **modelar os diferentes estados operacionais** da usina e suas **transições controladas**.
 
-- Adicione tratamento para campos obrigatórios do legado que não existem na interface moderna (ao menos um)
+### ✅ Benefícios
+- Elimina **estruturas condicionais complexas** (`if`/`switch`).  
+- Cada estado encapsula seu **próprio comportamento**.  
+- Permite **adição de novos estados** sem alterar o código existente.  
+- Facilita a **simulação e controle de segurança**, como o modo de manutenção.
 
+### 📊 Diagrama UML
+📁 [Ver diagrama da Questão 3](Diagramas/questao03.png)
 
+---
 
-Restrições:
+## ⚙️ Questão 4 — Chain of Responsibility Pattern
 
-- O legado exige codificação específica para moedas (USD=1, EUR=2, BRL=3)
+### 🧩 Contexto
+Sistema de validação de **documentos fiscais eletrônicos (NF-e)**, onde múltiplos validadores devem agir em sequência, com controle de falhas e rollback.
 
+### 💡 Padrão utilizado
+**Chain of Responsibility Pattern** — utilizado para **encadear validadores especializados**, permitindo que cada um decida se continua ou interrompe a cadeia.
 
+### ✅ Benefícios
+- Permite **encadear regras complexas** de forma dinâmica e modular.  
+- Implementa um **circuit breaker** (interrupção após 3 falhas).  
+- Oferece **rollback** automático em operações que modificam o documento.  
+- Favorece a **extensão de novas regras de validação** sem alterar o fluxo central.
 
-QUESTÃO 3 (0,25):
-Contexto: Você está modelando um sistema de controle para uma usina nuclear com estados complexos de operação. A usina pode estar em: DESLIGADA, OPERACAO_NORMAL, ALERTA_AMARELO, ALERTA_VERMELHO, EMERGENCIA.
+### 📊 Diagrama UML
+📁 [Ver diagrama da Questão 4](questao04.png)
 
-Problema:
+---
 
-- Cada transição de estado deve validar condições complexas (temperatura, pressão, nível de radiação)
+## 🧠 Conclusão
 
-- Algumas transições são bidirecionais, outras são unidirecionais
+Este projeto demonstra como os **padrões de projeto** podem:
+- Tornar o código **mais flexível e extensível**;  
+- **Reduzir acoplamento** entre classes;  
+- **Melhorar a legibilidade e manutenção** do sistema;  
+- Resolver **problemas reais** de forma elegante e padronizada.
 
-- Previna transições circulares perigosas
+---
 
-- O estado EMERGENCIA só pode ser ativado após passar por ALERTA_VERMELHO
-
-- Adicione um modo "manutenção" que sobreescreva temporariamente os estados normais
-
-
-
-Regras:
-
-- OPERACAO_NORMAL → ALERTA_AMARELO: se temperatura > 300°C
-
-- ALERTA_AMARELO → ALERTA_VERMELHO: se temperatura > 400°C por mais de 30 segundos
-
-- ALERTA_VERMELHO → EMERGENCIA: se sistema de resfriamento falhar
-
-
-
-QUESTÃO 4 (0,25):
-Contexto: Desenvolva um sistema de validação de documentos fiscais eletrônicos (NF-e) que precisa aplicar múltiplas regras de validação em cadeia.
-
-Problema:
-
-- Cada validador especializado verifica um aspecto específico do documento
-
-- A cadeia deve suportar validações condicionais (se validador X falhar, pule Y)
-
-- Implemente um mecanismo de "circuit breaker" que interrompa a cadeia após 3 validações falharem
-
-- Adicione capacidade de rollback para validadores que modificam o documento
-
-
-
-Validadores Requeridos:
-
-1. Validador de Schema XML contra XSD
-
-2. Validador de Certificado Digital (expiração e revogação)
-
-3. Validador de Regras Fiscais (cálculo de impostos)
-
-4. Validador de Banco de dados (duplicidade de número)
-
-5. Validador de Serviço SEFAZ (consulta online)
-
-
-
-Restrições:
-
-- Os validadores 3 e 5 devem ser executados apenas se os anteriores passarem
-
-- O validador 4 deve fazer rollback da inserção se validações subsequentes falharem
+### 👨‍💻 Autor
+**Carlos Eduardo Mendes Miranda**  
+Engenharia de Software — 2025
 
 - Implemente timeout individual para cada validador
