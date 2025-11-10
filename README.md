@@ -75,20 +75,4 @@ Sistema de validação de **documentos fiscais eletrônicos (NF-e)**, onde múlt
 ### 📊 Diagrama UML
 📁 [Ver diagrama da Questão 4](questao04.png)
 
----
 
-## 🧠 Conclusão
-
-Este projeto demonstra como os **padrões de projeto** podem:
-- Tornar o código **mais flexível e extensível**;  
-- **Reduzir acoplamento** entre classes;  
-- **Melhorar a legibilidade e manutenção** do sistema;  
-- Resolver **problemas reais** de forma elegante e padronizada.
-
----
-
-### 👨‍💻 Autor
-**Carlos Eduardo Mendes Miranda**  
-Engenharia de Software — 2025
-
-- Implemente timeout individual para cada validador
