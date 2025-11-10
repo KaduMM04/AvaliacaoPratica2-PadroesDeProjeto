@@ -73,6 +73,6 @@ Sistema de validação de **documentos fiscais eletrônicos (NF-e)**, onde múlt
 - Favorece a **extensão de novas regras de validação** sem alterar o fluxo central.
 
 ### 📊 Diagrama UML
-📁 [Ver diagrama da Questão 4](questao04.png)
+📁 [Ver diagrama da Questão 4](Diagramas/questao04.png)
 
 
